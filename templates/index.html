@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTML Code Preview</title>
+    <!-- Link to Font Awesome stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Link to Styled Components library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/styled-components/6.1.3/styled-components.min.js"></script>
+
+    <style>
+        /* Reset some default styles */
+        body, h1, h2, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Common Styles for Both Modes */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            position: relative; /* Added for positioning the buttons */
+            background-color: #f8f9fa;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            background-color: #FFFFFF;
+            padding: 15px;
+            color: #333;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        svg {
+            font-family: "Shizuru", sans-serif;
+            width: 100%; height: 100%;
+        }
+
+        svg text {
+            animation: stroke 6s infinite alternate;
+            stroke-width: 2;
+            stroke: #010304;
+            font-size: 50px;
+        }
+
+        @keyframes stroke {
+            0%   {
+                fill: rgba(11,0,0,0); stroke: rgba(1,3,4,1);
+                stroke-dashoffset: 25%; stroke-dasharray: 0 50%; stroke-width: 2;
+            }
+            70%  {fill: rgba(11,0,0,0); stroke: rgba(1,3,4,1); }
+            80%  {fill: rgba(11,0,0,0); stroke: rgba(1,3,4,1); stroke-width: 3; }
+            100% {
+                fill: rgba(11,0,0,1); stroke: rgba(1,3,4,0);
+                stroke-dashoffset: -25%; stroke-dasharray: 50% 0; stroke-width: 0;
+            }
+        }
+
+        .wrapper {
+            background-color: #FFFFFF;
+        }
+
+        /* Buttons Styles */
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+            color: #333;
+        }
+
+        a:hover {
+            background-color: #f0f0f0;
+        }
+
+        #get-html {
+            background-color: #28a745;
+            position: absolute;
+            top: 15px;
+            left: 15px; /* Adjust the left position as needed */
+        }
+
+        /* Form Styles */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Preview Container Styles */
+        .preview-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .rendered-html {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: auto;
+        }
+
+        /* Light Mode Styles */
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <svg>
+                <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                    HTML Code Preview
+                </text>
+            </svg>
+        </div>
+        <a id="get-html" href="https://proxy-server.ampfar10.repl.co/" target="_blank">
+            <i class="fas fa-code"></i> Get HTML
+        </a>
+    </header>
+
+    <form method="post" action="/">
+        <textarea name="html_code" rows="10" cols="80" placeholder="Enter your HTML code here...">{{ html_code }}</textarea>
+        <br>
+        <input type="submit" value="Render HTML">
+    </form>
+
+    <h2>HTML Preview:</h2>
+    <div class="preview-container">
+        <div class="rendered-html">
+            {{ rendered_html | safe }}
+        </div>
+    </div>
+
+    <!-- JavaScript for Mode Toggle -->
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle("light-mode");
+            body.classList.toggle("dark-mode");
+        }
+    </script>
+</body>
+</html>
