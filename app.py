@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Markup
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -6,8 +6,7 @@ app = Flask(__name__)
 def index():
     if request.method == 'POST':
         html_code = request.form.get('html_code', '')
-        rendered_html = Markup(html_code)
-        return render_template('index.html', html_code=html_code, rendered_html=rendered_html)
+        return render_template('index.html', html_code=html_code)
     return render_template('index.html')
 
 if __name__ == '__main__':
